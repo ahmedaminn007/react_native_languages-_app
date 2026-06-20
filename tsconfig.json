@@ -8,6 +8,21 @@
       ],
       "@/assets/*": [
         "./assets/*"
+      ],
+      "@/tw": [
+        "./src/tw/index"
+      ],
+      "@/tw/image": [
+        "./src/tw/image"
+      ],
+      "@/tw/animated": [
+        "./src/tw/animated"
+      ],
+      "@/theme": [
+        "./src/theme/index"
+      ],
+      "@/lib/*": [
+        "./src/lib/*"
       ]
     }
   },
@@ -15,6 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
   ]
 }
