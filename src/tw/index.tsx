@@ -14,12 +14,14 @@ import {
   TouchableHighlight as RNTouchableHighlight,
   TextInput as RNTextInput,
   StyleSheet,
+  type ColorValue,
 } from "react-native";
 
 // CSS-enabled Link
 export const Link = (
   props: React.ComponentProps<typeof RouterLink> & { className?: string }
 ) => {
+  // @ts-expect-error: useCssElement union type too complex for TS inference (TS2590)
   return useCssElement(RouterLink, props, { className: "style" });
 };
 
@@ -59,6 +61,7 @@ export const ScrollView = (
     contentContainerClassName?: string;
   }
 ) => {
+  // @ts-expect-error: useCssElement union type too complex for TS inference (TS2590)
   return useCssElement(RNScrollView, props, {
     className: "style",
     contentContainerClassName: "contentContainerStyle",
@@ -90,6 +93,7 @@ export const AnimatedScrollView = (
     contentContainerClassName?: string;
   }
 ) => {
+  // @ts-expect-error: useCssElement union type too complex for TS inference (TS2590)
   return useCssElement(Animated.ScrollView, props, {
     className: "style",
     contentClassName: "contentContainerStyle",
@@ -101,10 +105,11 @@ export const AnimatedScrollView = (
 function XXTouchableHighlight(
   props: React.ComponentProps<typeof RNTouchableHighlight>
 ) {
-  const { underlayColor, ...style } = StyleSheet.flatten(props.style) || {};
+  // Cast to record so we can extract underlayColor which isn't in ViewStyle typings
+  const { underlayColor, ...style } = (StyleSheet.flatten(props.style) || {}) as Record<string, unknown>;
   return (
     <RNTouchableHighlight
-      underlayColor={underlayColor}
+      underlayColor={underlayColor as ColorValue}
       {...props}
       style={style}
     />
